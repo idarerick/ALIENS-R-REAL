@@ -19,11 +19,20 @@ var submit = d3.select("#filter-btn");
 
 submit.on("click", function() {
 	d3.event.preventDefault();
-	var inputElement = d3.select("#form-control");
-	var inputValue = inputElement.property("value");
-	console.log(inputValue);
+	var date = d3.select("#datetime").property("value");
+	console.log(date);
+	if (date !== '') {
+		var filteredData = tableData.filter(data => data.datetime === date);
+		console.log(filteredData);
+		filteredData.forEach(data => {
+			var row = tbody.append("tr");
+			Object.entries(data).forEach(function([key, value]) {
+				console.log(key, value);
+				var cell = tbody.append("td");
+				cell.text(value);
+			})
+		})
+	}
 });
 
 
-d3.select("#date")
-	.append("td").text()
